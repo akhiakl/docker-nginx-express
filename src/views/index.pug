@@ -28,6 +28,8 @@ html(lang="en")
 
         hr
 
+        button#this-button Send
+
         h4 INSTANCE
         h2 #{environment.instance}
 
@@ -38,3 +40,14 @@ html(lang="en")
 
     script(src="/jquery/jquery.min.js")
     script(src="/bootstrap/js/bootstrap.min.js")
+    script(src="/socket.io/socket.io.js")
+    script.
+      const socket = io('', {
+      });
+      socket.on("hello", (arg) => {
+        console.log(arg); // world
+      });
+      $('#this-button').click(()=>{
+        console.log('Clicked')
+        socket.emit('hello', 'world')
+      })

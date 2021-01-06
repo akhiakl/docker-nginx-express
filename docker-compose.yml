@@ -1,6 +1,13 @@
-version: '2'
+version: "2"
 
 services:
+  redis:
+    image: redis:5
+    hostname: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
 
   nginx:
     build:
@@ -30,6 +37,8 @@ services:
       - "3000"
     environment:
       - INSTANCE=node1
+    depends_on:
+      - redis
     networks:
       - app-network
 
@@ -44,6 +53,8 @@ services:
       - "3000"
     environment:
       - INSTANCE=node2
+    depends_on:
+      - redis
     networks:
       - app-network
 
@@ -58,6 +69,8 @@ services:
       - "3000"
     environment:
       - INSTANCE=node3
+    depends_on:
+      - redis
     networks:
       - app-network
 
